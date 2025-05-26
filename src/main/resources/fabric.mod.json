@@ -13,19 +13,18 @@
   },
   "license": "CC0-1.0",
   "icon": "assets/template/icon.png",
-  "environment": "*",
+  "environment": "client",
   "entrypoints": {
-    "main": [
+    "client": [
       "com.example.TemplateMod"
     ],
-    "client": [
-      "com.example.TemplateModClient"
+    "modmenu": [
+      "com.example.config.ModMenuIntegration"
     ]
   },
   "mixins": [
-    "template.mixins.json",
     {
-      "config": "template.client.mixins.json",
+      "config": "template.mixins.json",
       "environment": "client"
     }
   ],
