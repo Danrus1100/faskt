@@ -1,6 +1,7 @@
 plugins {
     `maven-publish`
     id("fabric-loom")
+    kotlin("jvm")
     //id("dev.kikugie.j52j")
     //id("me.modmuss50.mod-publish-plugin")
 }
@@ -39,14 +40,21 @@ repositories {
         name = "Xander Maven"
     }
     maven("https://maven.nucleoid.xyz/") { name = "Nucleoid" }
+    maven ("https://maven.parchmentmc.org"){
+        name = "ParchmentMC"
+    }
     mavenCentral()
 }
 
 dependencies {
     minecraft("com.mojang:minecraft:$mcVersion")
-    mappings("net.fabricmc:yarn:$mcVersion+build.${deps["yarn_build"]}:v2")
+    mappings(loom.layered() {
+        officialMojangMappings()
+        parchment("org.parchmentmc.data:parchment-${mcVersion}:${deps["parchment"]}@zip")
+    })
     modImplementation("net.fabricmc:fabric-loader:${deps["fabric_loader"]}")
     modImplementation("net.fabricmc.fabric-api:fabric-api:${deps["fabric_api"]}")
+    modImplementation("net.fabricmc:fabric-language-kotlin:1.13.3+kotlin.2.1.21")
 
     modApi ("com.terraformersmc:modmenu:${deps["mod_menu"]}")
     modImplementation("dev.isxander:yet-another-config-lib:${deps["yacl"]}")
@@ -59,6 +67,7 @@ dependencies {
     else if (stonecutter.eval(mcVersion, "1.21.5" )) {
         modImplementation("eu.pb4:placeholder-api:2.6.1+1.21.5")
     }
+    implementation(kotlin("stdlib"))
 }
 
 loom {
@@ -78,8 +87,6 @@ loom {
 java {
     withSourcesJar()
     val java = if (stonecutter.eval(mcVersion, ">=1.20.6")) JavaVersion.VERSION_21 else JavaVersion.VERSION_17
-    targetCompatibility = java
-    sourceCompatibility = java
 }
 
 tasks.processResources {
@@ -103,6 +110,10 @@ tasks.register<Copy>("buildAndCollect") {
     from(tasks.remapJar.get().archiveFile)
     into(rootProject.layout.buildDirectory.file("libs/${mod.version}"))
     dependsOn("build")
+}
+
+kotlin {
+    jvmToolchain(21)
 }
 
 /*

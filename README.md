@@ -1,6 +1,6 @@
 # FASKT
 
-This is my template for client-side fabric mods. Be free to use
+This is my template for client-side fabric mods on kotlin. Be free to use
 
 # Futures:
 1. 1.20 - 1.21.5 support

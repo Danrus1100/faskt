@@ -16,10 +16,16 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "com.example.TemplateMod"
+      {
+        "adapter": "kotlin",
+        "value": "com.example.TemplateMod"
+      }
     ],
     "modmenu": [
-      "com.example.config.ModMenuIntegration"
+      {
+        "adapter": "kotlin",
+        "value": "com.example.config.ModMenuIntegration"
+      }
     ]
   },
   "mixins": [

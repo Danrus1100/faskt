@@ -1,0 +1,7 @@
+{
+  "yacl3.config.template_mod.title": "Template Mod",
+
+  "yacl3.config.template_mod.category.simpleCategory": "Simple Category",
+  "yacl3.config.template_mod.category.simpleCategory.group.general": "General",
+  "yacl3.config.template_mod.category.simpleCategory.group.general.option.myCoolBoolean": "My Cool Boolean"
+}
